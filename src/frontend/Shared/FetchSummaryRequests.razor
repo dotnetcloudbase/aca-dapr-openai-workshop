@@ -1,0 +1,50 @@
+@using Frontend.Data
+@inject SummaryRequestService SummaryRequestService
+@inject AppSettings AppSettings
+@inject ILogger<FetchSummaryRequests> Logger
+
+
+<h4 style="font-family: system-ui; margin-left: 5%; color: brown; padding-bottom: 10px; ">All requests</h4>
+
+@if (requests == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table style="margin-left: 5%;" class="table">
+    <thead>
+        <tr>
+            <th style="font-family: system-ui; color: brown;">Requestor</th>
+            <th style="font-family: system-ui; color: brown;">Url</th>
+            <th style="font-family: system-ui; color:brown;">Summary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in requests)
+            {
+                <tr>
+                    <td style="font-style: italic; font-family: ui-sans-serif; color:#653e3e;">@request.Email</td>
+                    <td style="font-style: italic; font-family: ui-sans-serif; color:#653e3e;"><a href="@request.Url">@request.Url</a></td>
+                    <td style="font-style: italic; font-family: ui-sans-serif; color:#653e3e;">@request.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+}
+
+@functions {
+    private SummaryRequest[]? requests;
+     
+    protected override async Task OnInitializedAsync()
+    {
+        try {
+            this.requests = await SummaryRequestService.GetSummaryRequestsAsync();
+        }
+        catch(Exception ex)
+        {
+            Logger.LogError(ex, "Error loading summary requests");
+        }
+    }
+}

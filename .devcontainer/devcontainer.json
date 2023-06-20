@@ -1,0 +1,54 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-in-docker
+{
+  "name": "aca-dapr-openai-workshop",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "workspaceFolder": "/workspaces/aca-dapr-openai-workshop",
+  "onCreateCommand": "bash ./.devcontainer/on-setup.sh",
+
+  "runArgs": [
+    "--privileged",
+        "--init"
+  ],
+  
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true",
+      "moby": "true"
+    },
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "version": "7"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/rust:1": {},
+    "ghcr.io/dapr/cli/dapr-cli:0": {}
+  },
+
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      "settings": {},
+      "extensions": [
+		"ms-azuretools.vscode-dapr",
+		"ms-dotnettools.csharp",
+		"ms-azuretools.vscode-docker",
+		"ms-python.python",
+		"GitHub.copilot",
+		"ms-azuretools.vscode-bicep"
+	]
+    }
+  }
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  //"postCreateCommand": "bash ./.devcontainer/on-setup.sh"
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
+}
