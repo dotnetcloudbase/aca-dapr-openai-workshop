@@ -65,7 +65,7 @@ async def link_to_summarize(event : SummarizeRequestCloudEvent):
 
 ## Implementing pub/sub and Http Invocation methods.
 
-1. Open the `request_handler.py` file in the `/src/frontend` folder.
+1. Open the `request_handler.py` file in the `/src/requests-processor` folder.
 
 2.  Fill the `run` method so that it invokes the `requests-api` to search for a existing request. If the request is not found, it should invoke Open AI to get the summary. If the request is found, then it will reuse the summary from the request. In any case, it should invoke again the request api at the end to commit the new request.
 
