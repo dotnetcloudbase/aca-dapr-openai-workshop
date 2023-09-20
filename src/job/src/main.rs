@@ -44,12 +44,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         metadata.insert("specversion".to_string(), "1.0".to_string());
         metadata.insert("id".to_string(), Uuid::new_v4().to_string());
         metadata.insert("time".to_string(), Utc::now().to_string());
-        metadata.insert("source".to_string(), "bulk-url-summarization-requestor".to_string());
+        metadata.insert("source".to_string(), "bulk-url-requestor".to_string());
         
         // Message CloudEvent data
         let message = json!({
-            "url": &url.to_string(),
-            "email": &requestor_email
+            "url": "https://learn.microsoft.com/en-us/azure/container-apps/overview".to_string(),
+            "email": "me@loadtesting.io"
         });
 
         println!("[INFO] Sending Url Summarization Request Event for {} owned by {}", &url, &requestor_email);

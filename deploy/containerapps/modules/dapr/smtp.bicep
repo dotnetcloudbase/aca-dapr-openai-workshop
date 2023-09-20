@@ -25,12 +25,6 @@ resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01'
     properties: {
       componentType: 'bindings.smtp'
       version: 'v1'
-      secrets: [
-        {
-          name: 'smtp-host'
-          value: smtpHost
-        }
-      ]
       metadata: [
         {
           name: 'emailFrom'
@@ -38,7 +32,7 @@ resource containerAppsEnvironment 'Microsoft.App/managedEnvironments@2022-03-01'
         }
         {
           name: 'host'
-          secretRef: 'smtp-host'
+          value: smtpHost
         }
         {
           name: 'port'

@@ -13,20 +13,20 @@ apps:
       STATE_STORE_QUERY_INDEX_NAME: "orgIndx"
       BINDING_SMTP: "summarizer-smtp"
       APP_PORT: 13000
-  - appID: summarizer-requests-processor
-    appDirPath: ./src/requests-processor/
-    appPort: 12000
-    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "12000"]
-    env:
-      SECRET_STORE_NAME: "summarizer-secretstore"
-      PUBSUB_REQUESTS_NAME: "summarizer-pubsub"
-      PUBSUB_REQUESTS_TOPIC: "link-to-summarize"
-      REQUESTS_API_APP_ID: "summarizer-requests-api"
-      REQUESTS_API_SEARCH_ENDPOINT: "search-requests-by-url"
-      REQUESTS_API_CREATE_ENDPOINT: "requests"
-      OPENAI_API_VERSION: "2022-12-01"
-      OPENAI_API_DEPLOYMENT_NAME: "aca-dapr-gpt-35-turbo-01"
-      APP_PORT: 12000
+  # - appID: summarizer-requests-processor
+  #   appDirPath: ./src/requests-processor/
+  #   appPort: 12000
+  #   command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "12000"]
+  #   env:
+  #     SECRET_STORE_NAME: "summarizer-secretstore"
+  #     PUBSUB_REQUESTS_NAME: "summarizer-pubsub"
+  #     PUBSUB_REQUESTS_TOPIC: "link-to-summarize"
+  #     REQUESTS_API_APP_ID: "summarizer-requests-api"
+  #     REQUESTS_API_SEARCH_ENDPOINT: "search-requests-by-url"
+  #     REQUESTS_API_CREATE_ENDPOINT: "requests"
+  #     OPENAI_API_VERSION: "2022-12-01"
+  #     OPENAI_API_DEPLOYMENT_NAME: "aca-dapr-gpt-35-turbo-01"
+  #     APP_PORT: 12000
   - appID: summarizer-frontend
     appDirPath: ./src/frontend/
     appPort: 11000
@@ -37,11 +37,20 @@ apps:
       REQUESTS_API_APP_ID: "summarizer-requests-api"
       REQUESTS_API_ENDPOINT: "requests"
       DOTNET_URLS: "http://*:11000"
-  - appID: job
+  # - appID: job
+  #   appDirPath: ./src/job
+  #   env: 
+  #     PUBSUB_REQUESTS_NAME: "summarizer-pubsub"
+  #     PUBSUB_REQUESTS_TOPIC: "link-to-summarize"
+  #     JOB_REQUESTED_URLS: "https://fr.wikipedia.org/wiki/Architecture_hexagonale"
+  #     JOB_REQUESTOR_EMAIL: me@contoso.com
+  #   command:  ["cargo", "run"]
+  - appID: summarize-job-load-test
     appDirPath: ./src/job
     env: 
-      PUBSUB_REQUESTS_NAME: "summarizer-pubsub"
-      PUBSUB_REQUESTS_TOPIC: "link-to-summarize"
-      JOB_REQUESTED_URLS: "https://fr.wikipedia.org/wiki/Architecture_hexagonale"
-      JOB_REQUESTOR_EMAIL: me@contoso.com
+      AZURE_SERVICE_BUS_NAMESPACE: sb-dev-frc-summarizer-00
+      AZURE_TOPIC_NAME: link-to-summarize
+      SUBSCRIPTION: job-load-tests
+      AZURE_POLICY_NAME : RootManageSharedAccessKey
+      AZURE_POLICY_KEY: 37xjPSmJJd/7s0ixdU3Q9AWW0UyX8BxN5+ASbDTnohQ=
     command:  ["cargo", "run"]

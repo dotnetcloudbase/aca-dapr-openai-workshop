@@ -17,7 +17,7 @@ class Settings:
         self.requests_api_create_endpoint = self.__get_environment_variable("REQUESTS_API_CREATE_ENDPOINT")
 
         # INFO : ONLY FOR DEBUG PURPOSE
-        # self.__show_secrets()
+        self.__show_secrets()
 
         # OpenAI settings
         self.open_api_version = self.__get_environment_variable("OPENAI_API_VERSION")
@@ -36,6 +36,11 @@ class Settings:
     open_api_version:{self.open_api_version}
     open_api_deployment_name:{self.open_api_deployment_name}
 </environment-variables>
+<secrets> 
+    ONLY FOR DEMO PURPOSE
+    open_api_key:{self.api_key}
+    open_api_endpoint:{self.open_api_endpoint}
+</secrets>
     """)
     # INFO : APPEND ONLY FOR DEBUG PURPOSE
 # <secrets> 

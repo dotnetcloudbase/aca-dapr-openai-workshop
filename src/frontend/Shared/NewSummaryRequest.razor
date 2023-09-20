@@ -5,19 +5,15 @@
 @inject ILogger<NewSummaryRequest> Logger
 @inject SummaryRequestService SummaryRequestService
 
-<h4 style="font-family: system-ui; 
-color: brown; padding-bottom: 10px; 
-margin-left: 5%;">Queue new request</h4> 
+<h4>Queue new request</h4> 
 
 <EditForm EditContext="@editContext" OnSubmit="@AddSummaryRequestAsync">
     <DataAnnotationsValidator />
-    <InputText id="email" @bind-Value="newSummaryRequestPayload.Email" placeholder="Email"
-    style="border-radius: 5px; border-color:brown; height:50px; width: 250px; margin-left:5%; border-style: double;" />
+    <InputText id="email" @bind-Value="newSummaryRequestPayload.Email" placeholder="Email" />
 
-    <InputText id="url" @bind-Value="newSummaryRequestPayload.Url" placeholder="Url" 
-    style="border-radius: 5px; border-color: brown; height: 50px; width: 250px; border-style: double;"/>
+    <InputText id="url" @bind-Value="newSummaryRequestPayload.Url" placeholder="Url" />
 
-    <button type="submit" class="btn btn-primary" style="background-color: brown; border-color: brown;">
+    <button type="submit" class="btn btn-primary">
      Queue
     </button>
     <ValidationSummary />
@@ -29,6 +25,7 @@ margin-left: 5%;">Queue new request</h4>
 
     protected override void OnInitialized()
     {
+        newSummaryRequestPayload.Email = "darei@microsoft.com";
         editContext = new(newSummaryRequestPayload);
     }
 
